@@ -8,9 +8,16 @@ import java.io.IOException;
 
 
 public class SmartHomeReaderWriterJson implements SmartHomeReaderWriter{
-    public SmartHome readHome(String jsonFileName) throws IOException {
-        Gson gson = new Gson();
-        String json = new String(Files.readAllBytes(Paths.get(jsonFileName)));
+    private Gson gson;
+    private String json;
+
+    public SmartHome readHome(String jsonFileName) {
+        try {
+            gson = new Gson();
+            json = new String(Files.readAllBytes(Paths.get(jsonFileName)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return gson.fromJson(json, SmartHome.class);
     }
 }
