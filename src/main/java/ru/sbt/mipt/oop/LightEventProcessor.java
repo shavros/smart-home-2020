@@ -18,22 +18,13 @@ public class LightEventProcessor implements EventProcessor{
      * @param event
      */
     public void handleEvent(SensorEvent event) {
-        if (event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF) {
-            System.out.println("Got event: " + event);
-            for (Room room : smartHome.getRooms()) {
-                for (Light light : room.getLights()) {
-                    if (light.getId().equals(event.getObjectId())) {
-                        if (event.getType() == LIGHT_ON) {
-                            light.setOn(true);
-                            System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned on.");
-                        } else {
-                            light.setOn(false);
-                            System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned off.");
-                        }
-                    }
-                }
-            }
+        if (event.getType() == LIGHT_ON) {
+            Action action = new LightOnAction(event);
+            smartHome.execute(action);
         }
-
+        if (event.getType() == LIGHT_OFF) {
+            Action action = new LightOffAction(event);
+            smartHome.execute(action);
+        }
     }
 }
