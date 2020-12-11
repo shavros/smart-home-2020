@@ -20,6 +20,8 @@ public class EventProcessorChooser{
         eventProcessor.add(new DoorEventProcessor(smartHome));
         eventProcessor.add(new HallDoorEventProcessor(smartHome));
         eventProcessor.add(new LightEventProcessor(smartHome));
+        eventProcessor.add(new AlarmActivateEventProcessor(smartHome));
+        eventProcessor.add(new AlarmDeactivateEventProcessor(smartHome));
         while (event != null) {
             for (EventProcessor processor: eventProcessor) {
                 processor.handleEvent(event);

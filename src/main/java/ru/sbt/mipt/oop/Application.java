@@ -11,7 +11,8 @@ import java.io.IOException;
 public class Application {
     public static void main(String... args) throws IOException {
         SmartHomeReaderWriter reader = new SmartHomeReaderWriterJson();
-        SmartHome smartHome = reader.readHome("smart-home-1.js");
+        SmartHome smartHome = reader.readHome("output.js");
+        smartHome.alarm.changeState(new AlarmDeactivatedState(smartHome.alarm));
         SensorEvent event = RandomEventGenerator.getNextSensorEvent();
         EventProcessorChooser.chooseEventProcessor(event, smartHome);
     }
