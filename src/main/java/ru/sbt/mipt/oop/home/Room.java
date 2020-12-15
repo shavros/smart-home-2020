@@ -1,8 +1,13 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.home;
+
+import ru.sbt.mipt.oop.action.Action;
+import ru.sbt.mipt.oop.action.Actionable;
+import ru.sbt.mipt.oop.home.Door;
+import ru.sbt.mipt.oop.home.Light;
 
 import java.util.Collection;
 
-public class Room {
+public class Room implements Actionable {
     private Collection<Light> lights;
     private Collection<Door> doors;
     private String name;
@@ -23,5 +28,16 @@ public class Room {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void execute(Action action) {
+        action.apply(this);
+        for (Light light: lights) {
+            light.execute(action);
+        }
+        for (Door door: doors) {
+            door.execute(action);
+        }
     }
 }
