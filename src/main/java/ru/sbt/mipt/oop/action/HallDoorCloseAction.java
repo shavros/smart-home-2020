@@ -17,14 +17,13 @@ public class HallDoorCloseAction implements Action {
 
     @Override
     public void apply(Object object) {
-        if (object instanceof Room) {
-            currentPlace = ((Room) object).getName();
-        }
-        if (object instanceof Door) {
-            if (((Door) object).getId().equals(objectId) && currentPlace.equals("hall")) {
-                Action action = new AllLightsTurnOffAction();
-                smartHome.execute(action);
-                System.out.println("All lights were turned off");
+        if (object instanceof Room && ((Room) object).getName().equals("hall")) {
+            for (Door door: ((Room) object).getDoors()) {
+                if (door.getId().equals(objectId)) {
+                    Action action = new AllLightsTurnOffAction();
+                    smartHome.execute(action);
+                    System.out.println("All lights were turned off");
+                }
             }
         }
     }
