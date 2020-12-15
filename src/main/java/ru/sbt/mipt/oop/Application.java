@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop;
 
+import com.coolcompany.smarthome.events.EventHandler;
+import com.coolcompany.smarthome.events.SensorEventsManager;
 import ru.sbt.mipt.oop.action.MessageSender;
 import ru.sbt.mipt.oop.action.SMSMessageSender;
 import ru.sbt.mipt.oop.event.RandomEventGenerator;
@@ -8,6 +10,8 @@ import ru.sbt.mipt.oop.home.SmartHome;
 import ru.sbt.mipt.oop.home.SmartHomeReaderWriter;
 import ru.sbt.mipt.oop.home.SmartHomeReaderWriterJson;
 import ru.sbt.mipt.oop.processor.*;
+import ru.sbt.mipt.oop.remote.AllLightsTurnOffCommand;
+import ru.sbt.mipt.oop.remote.SmartHomeRemoteController;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +27,8 @@ public class Application {
     public static void main(String... args) throws IOException {
         SmartHomeReaderWriter reader = new SmartHomeReaderWriterJson();
         SmartHome smartHome = reader.readHome("output.js");
+        SmartHomeRemoteController rc = new SmartHomeRemoteController();
+        rc.addCommand("2", new AllLightsTurnOffCommand(smartHome));
         SensorEvent event = RandomEventGenerator.getNextSensorEvent();
         Collection<EventProcessor> eventProcessor = new ArrayList<>();
         MessageSender sender = new SMSMessageSender();
@@ -37,6 +43,12 @@ public class Application {
             chooser.chooseEventProcessor(event);
             event = RandomEventGenerator.getNextSensorEvent();
         }
+        System.out.println("Демонстрация работы сторонней библиотеки через адаптер");
+        SensorEventsManager sensorEventsManager = new SensorEventsManager();
+        sensorEventsManager.registerEventHandler(new EventProcessorCCAdapter(new EventProcessorChooser(eventProcessor)));
+        sensorEventsManager.start();
+        System.out.println("Демонстрация работы пульта");
+        rc.onButtonPressed("2", "0");
     }
 
 
