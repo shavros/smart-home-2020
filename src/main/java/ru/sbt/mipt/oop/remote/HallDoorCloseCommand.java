@@ -1,16 +1,13 @@
 package ru.sbt.mipt.oop.remote;
 
-import ru.sbt.mipt.oop.action.Actionable;
-import ru.sbt.mipt.oop.action.HallDoorCloseAction;
 import ru.sbt.mipt.oop.home.Door;
-import ru.sbt.mipt.oop.home.Light;
 import ru.sbt.mipt.oop.home.Room;
 import ru.sbt.mipt.oop.home.SmartHome;
 
-public class HallDoorCloseComand implements Comand{
+public class HallDoorCloseCommand implements Command {
     private SmartHome smartHome;
 
-    public HallDoorCloseComand(SmartHome smartHome) {
+    public HallDoorCloseCommand(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 

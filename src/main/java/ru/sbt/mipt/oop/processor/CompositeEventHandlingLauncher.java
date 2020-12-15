@@ -1,7 +1,6 @@
 package ru.sbt.mipt.oop.processor;
 
 
-import ru.sbt.mipt.oop.event.RandomEventGenerator;
 import ru.sbt.mipt.oop.event.SensorEvent;
 
 import java.util.ArrayList;
@@ -11,10 +10,10 @@ import java.util.Collection;
 /**
  * Класс обеспечивает цикл обработки событий
  */
-public class EventProcessorChooser implements Chooser{
+public class CompositeEventHandlingLauncher implements EventHandlingLauncher {
     private Collection<EventProcessor> eventProcessor = new ArrayList<>();
 
-    public EventProcessorChooser(Collection<EventProcessor> eventProcessor) {
+    public CompositeEventHandlingLauncher(Collection<EventProcessor> eventProcessor) {
         this.eventProcessor = eventProcessor;
     }
     /**

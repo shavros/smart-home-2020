@@ -1,12 +1,10 @@
 package ru.sbt.mipt.oop.remote;
 
-import ru.sbt.mipt.oop.action.Actionable;
-import ru.sbt.mipt.oop.action.AllLightsTurnOffAction;
 import ru.sbt.mipt.oop.home.Light;
 import ru.sbt.mipt.oop.home.Room;
 import ru.sbt.mipt.oop.home.SmartHome;
 
-public class AllLightsTurnOffCommand implements Comand{
+public class AllLightsTurnOffCommand implements Command {
     private SmartHome smartHome;
     public AllLightsTurnOffCommand(SmartHome smartHome) {
         this.smartHome = smartHome;

@@ -3,10 +3,10 @@ package ru.sbt.mipt.oop.remote;
 import ru.sbt.mipt.oop.alarm.AlarmActivatedState;
 import ru.sbt.mipt.oop.home.SmartHome;
 
-public class AlarmActivateComand implements Comand{
+public class AlarmActivateCommand implements Command {
     private SmartHome smartHome;
 
-    public AlarmActivateComand(SmartHome smartHome) {
+    public AlarmActivateCommand(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 

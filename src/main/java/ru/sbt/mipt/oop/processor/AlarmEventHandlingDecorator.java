@@ -6,12 +6,12 @@ import ru.sbt.mipt.oop.alarm.AlarmAlertState;
 import ru.sbt.mipt.oop.event.SensorEvent;
 import ru.sbt.mipt.oop.event.SensorEventType;
 
-public class EventProcessorChooserDecorator implements Chooser{
-    private EventProcessorChooser basicChooser;
+public class AlarmEventHandlingDecorator implements EventHandlingLauncher {
+    private CompositeEventHandlingLauncher basicChooser;
     private Alarm alarm;
     private MessageSender sender;
 
-    public EventProcessorChooserDecorator(EventProcessorChooser basicChooser, Alarm alarm, MessageSender sender) {
+    public AlarmEventHandlingDecorator(CompositeEventHandlingLauncher basicChooser, Alarm alarm, MessageSender sender) {
         this.basicChooser = basicChooser;
         this.alarm = alarm;
         this.sender = sender;
@@ -25,7 +25,6 @@ public class EventProcessorChooserDecorator implements Chooser{
             return;
         }
         if (alarm.isActivated()) {
-            basicChooser.chooseEventProcessor(event);
             alarm.changeState(new AlarmAlertState(alarm));
             sender.send("Отправляю SMS хозяину дома, что-то произошло");
             return;

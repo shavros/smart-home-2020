@@ -10,7 +10,6 @@ public class Alarm {
 
     public Alarm(String code) {
         this.code = code;
-        //this.state = new AlarmDeactivatedState(this);
     }
 
     public void activate(String code) {
@@ -24,27 +23,15 @@ public class Alarm {
     public void activateAlert() {this.state.activateAlert();}
 
     public boolean isActivated() {
-        if (state instanceof AlarmActivatedState) {
-            return true;
-        } else {
-            return false;
-        }
+        return state instanceof AlarmActivatedState;
     }
 
     public boolean isDeactivated() {
-        if (state instanceof AlarmDeactivatedState) {
-            return true;
-        } else {
-            return false;
-        }
+        return state instanceof AlarmDeactivatedState;
     }
 
     public boolean isAlert() {
-        if (state instanceof AlarmAlertState) {
-            return true;
-        } else {
-            return false;
-        }
+        return state instanceof AlarmAlertState;
     }
 
     public void changeState(AlarmState state) {

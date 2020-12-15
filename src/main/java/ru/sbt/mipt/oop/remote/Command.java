@@ -1,5 +1,5 @@
 package ru.sbt.mipt.oop.remote;
 
-public interface Comand {
+public interface Command {
     void execute();
 }

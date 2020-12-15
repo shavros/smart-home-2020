@@ -1,14 +1,13 @@
 package ru.sbt.mipt.oop.remote;
 
-import ru.sbt.mipt.oop.action.Actionable;
 import ru.sbt.mipt.oop.home.Light;
 import ru.sbt.mipt.oop.home.Room;
 import ru.sbt.mipt.oop.home.SmartHome;
 
-public class HallLightTurnOnComand implements Comand{
+public class HallLightTurnOnCommand implements Command {
     private SmartHome smartHome;
 
-    public HallLightTurnOnComand(SmartHome smartHome) {
+    public HallLightTurnOnCommand(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 

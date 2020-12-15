@@ -4,10 +4,10 @@ import ru.sbt.mipt.oop.home.Light;
 import ru.sbt.mipt.oop.home.Room;
 import ru.sbt.mipt.oop.home.SmartHome;
 
-public class AllLightsTurnOnComand implements Comand{
+public class AllLightsTurnOnCommand implements Command {
     private SmartHome smartHome;
 
-    public AllLightsTurnOnComand(SmartHome smartHome) {
+    public AllLightsTurnOnCommand(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 
