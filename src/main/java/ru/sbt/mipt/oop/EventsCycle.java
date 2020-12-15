@@ -26,9 +26,9 @@ public class EventsCycle {
 
     public void start() {
         while (event != null) {
-            EventHandlingLauncher eventHandlingLauncher =
+            EventProcessor eventHandlingLauncher =
                     new AlarmEventHandlingDecorator(new CompositeEventHandlingLauncher(eventProcessors), smartHome.getAlarm(), sender);
-            eventHandlingLauncher.chooseEventProcessor(event);
+            eventHandlingLauncher.handleEvent(event);
             event = RandomEventGenerator.getNextSensorEvent();
         }
     }

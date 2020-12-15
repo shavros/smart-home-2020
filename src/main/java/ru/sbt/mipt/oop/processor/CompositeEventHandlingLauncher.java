@@ -10,8 +10,8 @@ import java.util.Collection;
 /**
  * Класс обеспечивает цикл обработки событий
  */
-public class CompositeEventHandlingLauncher implements EventHandlingLauncher {
-    private Collection<EventProcessor> eventProcessor = new ArrayList<>();
+public class CompositeEventHandlingLauncher implements EventProcessor {
+    private Collection<EventProcessor> eventProcessor;
 
     public CompositeEventHandlingLauncher(Collection<EventProcessor> eventProcessor) {
         this.eventProcessor = eventProcessor;
@@ -22,7 +22,7 @@ public class CompositeEventHandlingLauncher implements EventHandlingLauncher {
      * принимает событие и дом, в котором работает, создает коллекцию обработчиков и прокидывает через нее событие
      */
     @Override
-    public void chooseEventProcessor(SensorEvent event) {
+    public void handleEvent(SensorEvent event) {
         for (EventProcessor processor: eventProcessor) {
             processor.handleEvent(event);
         }

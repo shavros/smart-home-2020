@@ -17,7 +17,11 @@ public class Alarm {
     }
 
     public void deactivate(String code) {
-        this.state.deactivate(code);
+        if (state == null) {
+            changeState(new AlarmDeactivatedState(this));
+        } else {
+            this.state.deactivate(code);
+        }
     }
 
     public void activateAlert() {this.state.activateAlert();}

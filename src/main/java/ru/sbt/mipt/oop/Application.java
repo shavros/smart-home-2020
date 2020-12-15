@@ -1,6 +1,8 @@
 package ru.sbt.mipt.oop;
 
 import com.coolcompany.smarthome.events.SensorEventsManager;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import ru.sbt.mipt.oop.action.MessageSender;
 import ru.sbt.mipt.oop.action.SMSMessageSender;
 import ru.sbt.mipt.oop.event.RandomEventGenerator;
@@ -24,18 +26,9 @@ import java.util.Collection;
  */
 public class Application {
     public static void main(String... args) throws IOException {
-        SmartHomeReaderWriter reader = new SmartHomeReaderWriterJson();
-        SmartHome smartHome = reader.readHome("output.js");
-        SensorEvent event = RandomEventGenerator.getNextSensorEvent();
-        Collection<EventProcessor> eventProcessor = new ArrayList<>();
-        MessageSender sender = new SMSMessageSender();
-        eventProcessor.add(new DoorEventProcessor(smartHome));
-        eventProcessor.add(new HallDoorEventProcessor(smartHome));
-        eventProcessor.add(new LightEventProcessor(smartHome));
-        eventProcessor.add(new AlarmActivateEventProcessor(smartHome));
-        eventProcessor.add(new AlarmDeactivateEventProcessor(smartHome));
-        EventsCycle cycle = new EventsCycle(event, eventProcessor, smartHome, sender);
-        cycle.start();
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+        SensorEventsManager sensorEventsManager = context.getBean(SensorEventsManager.class);
+        sensorEventsManager.start();
     }
 
 

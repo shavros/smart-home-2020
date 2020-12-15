@@ -9,11 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EventProcessorCCAdapter implements EventHandler {
-    private EventHandlingLauncher adaptedEventHandlingLauncher;
+    private EventProcessor adaptedEventHandlingLauncher;
     private Map<String, SensorEventType> eventTypeMap = new HashMap<>();
 
-    public EventProcessorCCAdapter(HashMap<String, SensorEventType> eventTypeMap) {
+    public EventProcessorCCAdapter(HashMap<String, SensorEventType> eventTypeMap, EventProcessor adaptedEventHandlingLauncher) {
         this.eventTypeMap = eventTypeMap;
+        this.adaptedEventHandlingLauncher = adaptedEventHandlingLauncher;
     }
 
     @Override
@@ -22,7 +23,7 @@ public class EventProcessorCCAdapter implements EventHandler {
             System.out.println("Адаптер не поддерживает данный вид событий");
         } else {
             SensorEvent sensorEvent = new SensorEvent(eventTypeMap.get(event.getEventType()), event.getObjectId(), "0");
-            adaptedEventHandlingLauncher.chooseEventProcessor(sensorEvent);
+            adaptedEventHandlingLauncher.handleEvent(sensorEvent);
         }
     }
 }
