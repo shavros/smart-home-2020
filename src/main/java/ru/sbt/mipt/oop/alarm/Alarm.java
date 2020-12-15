@@ -34,7 +34,7 @@ public class Alarm {
         return state instanceof AlarmAlertState;
     }
 
-    public void changeState(AlarmState state) {
+    void changeState(AlarmState state) {
         this.state = state;
         System.out.println(state.toString());
     }

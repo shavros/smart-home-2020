@@ -21,7 +21,7 @@ public class SmartHomeReaderWriterJson implements SmartHomeReaderWriter {
         }
 
         SmartHome smartHome = gson.fromJson(json, SmartHome.class);
-        smartHome.getAlarm().changeState(new AlarmDeactivatedState(smartHome.getAlarm()));
+        smartHome.getAlarm().deactivate("0000");
         return smartHome;
     }
 }

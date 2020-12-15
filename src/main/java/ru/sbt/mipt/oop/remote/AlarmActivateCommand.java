@@ -12,6 +12,6 @@ public class AlarmActivateCommand implements Command {
 
     @Override
     public void execute() {
-        smartHome.getAlarm().changeState(new AlarmActivatedState(smartHome.getAlarm()));
+        smartHome.getAlarm().activate("0000");
     }
 }

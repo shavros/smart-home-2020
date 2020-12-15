@@ -25,7 +25,7 @@ public class AlarmEventHandlingDecorator implements EventHandlingLauncher {
             return;
         }
         if (alarm.isActivated()) {
-            alarm.changeState(new AlarmAlertState(alarm));
+            alarm.activateAlert();
             sender.send("Отправляю SMS хозяину дома, что-то произошло");
             return;
         }
